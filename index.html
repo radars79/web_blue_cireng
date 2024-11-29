@@ -3,37 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>loby</title>
 </head>
 <style>
 
 .info{
-display: flex;
-position: absolute;
 bottom: 8px;
 right: 16px;
+display: flex;
+position: absolute;
 }
 .report_arona_1{
-width: 900px;
+    width: 200px;
+    height: auto;
+    transition: opacity 0.4s ease-in-out;
+
+}
+.report_arona_2{
+    width: 200px;
+    height: auto;
+    transition: opacity 0.4s ease-in-out;
 }
 .wa_arona_1{
-    width: 900px;
+    height: auto;
+    width: 200px;
+    padding-bottom: 25px;
 }
 .blue_archive_logo {
 position: absolute;
-width: 1900px; 
+width: 600px; 
 align-items: center;
 left:40%;
 right: 50%;
-top: 1%;
+top: 1%;}
+
+.cireng{
+    height: 100px;
+    width: 200px;
+    font-size: 50px;
+    position: absolute;
+    display: flex;
+    left: 50%;
+    right: 50%;
+    bottom: 55%;
+    text-decoration:none ;
+}
+ul li a{
+    text-decoration: none;
+}
+ul li{
+ list-style-type: none;
 }
 
 #myVideo {
   position: fixed;
   right: 0;
-  bottom: 0;
-  min-width: 100%; 
+  bottom: 0; 
   min-height: 100%;
+  width: 1920px;
+}
+/* .hover-image {
+
+} */
+.hover-container {
+    display: inline-block;
+}
+.hover-container img:first-child {
+    position: absolute; 
+    opacity: 1;
+}
+.hover-container img:last-child {
+    opacity: 0;
+}
+.hover-container:hover img:first-child {
+    opacity: 0;
+}
+.hover-container:hover img:last-child {
+    opacity: 1;
 }
 </style>
 <body>
@@ -46,8 +92,25 @@ top: 1%;
     
         <img class="blue_archive_logo" src="blue archive logo.png" alt="blue archive logo.png">
         <div class="info">
+            <div>
+            <img src="" alt="">
             <img class="wa_arona_1" src="wa arona.png" alt="report">
-            <img class="report_arona_1" src="report arona 1`.png" alt="report">
+            </div>
+            <div class="hover-container">
+                <img class="report_arona_2" src="report_arona2..png" alt="report_arona_2">
+                <img class="report_arona_1" src="report_arona1.png" alt="report">
+            </div>
+        </div>
+        <div class="cireng">
+        <ul>    
+            <li>
+                <a href="menu cireng.html">CIRENG</a>
+            </li>
+            <br>
+            <li>
+                <a href="https://play.google.com/store/apps/details?id=com.nexon.bluearchive">SPONSOR</a>
+            </li>
+        </ul>
         </div>
     </div>
     
