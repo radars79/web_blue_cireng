@@ -4,50 +4,79 @@
     navbarnav.classList.toggle('active');
   };
 
-  // Tombol dan elemen terkait pembelian
-  const tombolBeli = document.getElementById('beli-sekarang');
-  const detailPesanan = document.getElementById('detail-pesanan');
-  const tambahBtn = document.getElementById('tambah');
-  const kurangBtn = document.getElementById('kurang');
-  const jumlahSpan = document.getElementById('jumlah');
-  const totalHarga = document.getElementById('total-harga');
-  const stokDisplay = document.getElementById('stok');
-
-  // Variabel stok dan harga
-  const stokMaks = 10;
+   const stokMaks = 10;
   const hargaPerPcs = 3000;
-  let jumlah = 0;
 
-  // Tampilkan detail pesanan saat tombol beli ditekan
-  tombolBeli.addEventListener('click', () => {
-    detailPesanan.style.display = 'block';
-  });
+  const kurangBtn = document.getElementById("kurang");
+  const tambahBtn = document.getElementById("tambah");
+  const jumlahInput = document.getElementById("jumlah"); // <input>
+  const totalHarga = document.getElementById("total-harga");
+  const stokDisplay = document.getElementById("stok");
+  const checkoutBtn = document.getElementById("checkout-wa");
 
-  // Update tampilan jumlah, total harga, dan stok
-  function updateUI() {
-    jumlahSpan.textContent = jumlah;
-    totalHarga.textContent = Total: Rp ${(jumlah * hargaPerPcs).toLocaleString()};
-    stokDisplay.textContent = Stok tersedia: ${stokMaks - jumlah};
+  // Inisialisasi stok di localStorage jika belum ada
+  if (localStorage.getItem('stokCireng') === null) {
+    localStorage.setItem('stokCireng', stokMaks.toString());
   }
 
-  // Event klik tombol tambah
-  tambahBtn.addEventListener('click', () => {
-    if (jumlah < stokMaks) {
-      jumlah++;
-      updateUI();
-    } else {
-      alert("Maaf, stok cireng sudah habis.");
-      
+  let stok = parseInt(localStorage.getItem('stokCireng'));
+  let jumlah = 0;
+
+  function updateUI() {
+    jumlah = parseInt(jumlahInput.value) || 0;
+
+    if (jumlah > stok) {
+      jumlah = stok;
+      jumlahInput.value = jumlah;
+      alert('Maaf, stok cireng sudah habis.');
+    } else if (jumlah < 0) {
+      jumlah = 0;
+      jumlahInput.value = jumlah;
     }
+
+    totalHarga.textContent = Total: Rp ${(jumlah * hargaPerPcs).toLocaleString()};
+    stokDisplay.textContent = Stok tersedia: ${stok};
+  }
+
+  tambahBtn.addEventListener('click', () => {
+    jumlah = parseInt(jumlahInput.value) || 0;
+    if (jumlah < stok) {
+      jumlah++;
+      jumlahInput.value = jumlah;
+    } else {
+      alert('Maaf, stok cireng sudah habis.');
+    }
+    updateUI();
   });
 
-  // Event klik tombol kurang
   kurangBtn.addEventListener('click', () => {
+    jumlah = parseInt(jumlahInput.value) || 0;
     if (jumlah > 0) {
       jumlah--;
+      jumlahInput.value = jumlah;
+    }
+    updateUI();
+  });
+
+  jumlahInput.addEventListener('input', updateUI);
+
+  checkoutBtn.addEventListener('click', () => {
+    jumlah = parseInt(jumlahInput.value) || 0;
+    if (jumlah > 0) {
+      stok -= jumlah;
+      localStorage.setItem('stokCireng', stok.toString());
+
+      const pesan = Assalamualaikum, saya mau beli ${jumlah} cireng dengan metode pembayaran COD.;
+      const url = https://wa.me/628981200108?text=${encodeURIComponent(pesan)};
+
+      jumlah = 0;
+      jumlahInput.value = jumlah;
       updateUI();
+
+      window.open(url, '_blank');
+    } else {
+      alert('Silakan pilih jumlah terlebih dahulu.');
     }
   });
 
-  // Jalankan update UI pertama kali
-  updateUI();
+  updateUI(); // Inisialisasi pertama kali
