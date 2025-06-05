@@ -15,12 +15,16 @@ const stokDisplay = document.getElementById("stok");
 const checkoutBtn = document.getElementById("checkout-wa");
 
 // Inisialisasi stok di localStorage jika belum ada
-if (localStorage.getItem('stokCireng') === null) {
-  localStorage.setItem('stokCireng', stokMaks.toString());
-}
+// if (localStorage.getItem('stokCireng') === null) {
+//   localStorage.setItem('stokCireng', stokMaks.toString());
+// }
+
+// untuk demo
+localStorage.setItem('stokCireng', '60');
 
 let stok = parseInt(localStorage.getItem('stokCireng'));
 let jumlah = 0;
+
 
 function updateUI() {
   jumlah = parseInt(jumlahInput.value) || 0;
@@ -78,5 +82,6 @@ checkoutBtn.addEventListener('click', () => {
     alert('Silakan pilih jumlah terlebih dahulu.');
   }
 });
+
 
 updateUI(); // Inisialisasi UI saat pertama
