@@ -4,7 +4,7 @@ document.querySelector('#menu').onclick = () => {
   navbarnav.classList.toggle('active');
 };
 
-const stokMaks = 10;
+const stokMaks = 60;
 const hargaPerPcs = 3000;
 
 const kurangBtn = document.getElementById("kurang");
